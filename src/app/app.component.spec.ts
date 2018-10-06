@@ -1,31 +1,33 @@
-import { TestBed, async } from '@angular/core/testing';
-import { AppComponent } from './app.component';
 
-describe('AppComponent', () => {
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [
-        AppComponent
-      ],
-    }).compileComponents();
-  }));
+import { AppPage } from './app.po';
 
-  it('should create the app', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app).toBeTruthy();
+describe('workspace-project App', () => {
+  let page: AppPage;
+
+  beforeEach(() => {
+    page = new AppPage();
+    page.navigateTo();
   });
 
-  it(`should have as title 'address-book-angular'`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('address-book-angular');
+  it('should display create contact header', () => {
+    expect(page.getParagraphText()).toEqual('Create contact');
   });
 
-  it('should render title in a h1 tag', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('h1').textContent).toContain('Welcome to address-book-angular!');
+  it('should add a new contact', () => {
+    let count = page.cardCount();
+    expect(count).toBe(0);
+
+    page.getField('name').sendKeys('John Doe');
+    page.getField('email').sendKeys('john@craftacademy.se');
+    page.getField('company').sendKeys('Craft Academy');
+    page.getField('role').sendKeys('Tester');
+    page.getField('twitter').sendKeys('@tester');
+    page.getField('location').sendKeys('Gothenburg');
+    page.getField('notes').sendKeys('Some tester guy');
+
+    page.getSubmitButton().click();
+
+    count = page.cardCount();
+    expect(count).toBe(1);
   });
 });
