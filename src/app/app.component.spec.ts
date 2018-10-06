@@ -1,33 +1,25 @@
+import { TestBed, async } from '@angular/core/testing';
+import { AppComponent } from './app.component';
+import { FormsModule } from '@angular/forms';
+import { Input } from '@angular/core';
 
-import { AppPage } from './app.po';
+describe('AppComponent', () => {
 
-describe('workspace-project App', () => {
-  let page: AppPage;
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      declarations: [
+        AppComponent
+      ],
+      imports: [
+        FormsModule
+      ],
+    }).compileComponents();
+  }));
 
-  beforeEach(() => {
-    page = new AppPage();
-    page.navigateTo();
-  });
+  it('should create the app', async(() => {
+    const fixture = TestBed.createComponent(AppComponent);
+    const app = fixture.debugElement.componentInstance;
+    expect(app).toBeTruthy();
+  }));
 
-  it('should display create contact header', () => {
-    expect(page.getParagraphText()).toEqual('Create contact');
-  });
-
-  it('should add a new contact', () => {
-    let count = page.cardCount();
-    expect(count).toBe(0);
-
-    page.getField('name').sendKeys('John Doe');
-    page.getField('email').sendKeys('john@craftacademy.se');
-    page.getField('company').sendKeys('Craft Academy');
-    page.getField('role').sendKeys('Tester');
-    page.getField('twitter').sendKeys('@tester');
-    page.getField('location').sendKeys('Gothenburg');
-    page.getField('notes').sendKeys('Some tester guy');
-
-    page.getSubmitButton().click();
-
-    count = page.cardCount();
-    expect(count).toBe(1);
-  });
 });
