@@ -10,15 +10,6 @@ export class CardComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
-    this.contact = {
-      name: '',
-      email: '',
-      company: '',
-      role: '',
-      twitter: '',
-      location: '',
-      notes: ''
-    };
-  }
+  ngOnInit() {        
+  };
 }
